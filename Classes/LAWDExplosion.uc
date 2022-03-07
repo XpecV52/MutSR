@@ -1,0 +1,1 @@
+class LAWDExplosion extends LAWExplosion;

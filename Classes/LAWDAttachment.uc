@@ -1,0 +1,2 @@
+class LAWDAttachment extends LAWAttachment;
+

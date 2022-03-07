@@ -1,13 +1,8 @@
-// Written by .:..: (2009)
 Class MutSR_ServerPerksMut extends Mutator
 	Config(MutSR_ServerPerks);
 
 
 #exec OBJ LOAD FILE="Textures\CountryFlagsTex.utx" PACKAGE=MutSR
-
-#exec OBJ LOAD FILE="KFSXHud.utx" PACKAGE=MutSR
-#exec OBJ LOAD FILE="SXShopArrow.usx" PACKAGE=MutSR
-#exec OBJ LOAD FILE="SXKEND.utx" PACKAGE=MutSR
 
 struct ChatIconType
 {
@@ -43,7 +38,7 @@ struct SPickupReplacement {
     var class<Pickup> newClass;
 };
 var array<SPickupReplacement> pickupReplaceArray;
-var globalconfig bool bReplacePickups;//, bReplacePickupsStory;
+var globalconfig bool bReplacePickups;
 
 var() globalconfig bool bUploadAllStats,bForceGivePerk,bNoSavingProgress,bUseRemoteDatabase,bUsePlayerNameAsID,bMessageAnyPlayerLevelUp,bNoPerkChanges
 						,bUseLowestRequirements,bBWZEDTime,bUseEnhancedScoreboard,bOverrideUnusedCustomStats,bAllowAlwaysPerkChanges,bEnableWebAdmin
@@ -512,51 +507,9 @@ function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
 		SetupRepLink(MutSR_ClientPerkRepLink(Other));
 
 
-    /* else if ( KFMonster(Other) != none ) {
-        SetupMonster(KFMonster(Other));
-    }
-    else if ( SRStatsBase(Other) != none ) {
-        SetupRepLink(SRStatsBase(Other).Rep);
-    } */
-    /* else if ( bStoryMode ) 
-	{
-        if ( KFLevelRules_Story(Other) != none  ) 
-		{
-            if ( bReplacePickupsStory )
-                SetupStoryRules(KFLevelRules_Story(Other));
-        }
-        else if ( KF_StoryNPC(Other) != none ) 
-		{
-            if ( Other.class == class'KF_BreakerBoxNPC' ) // don't alter subclasses
-                KF_StoryNPC(Other).BaseAIThreatRating = 20;
-            else if ( Other.class == class'KF_RingMasterNPC' )
-                KF_StoryNPC(Other).BaseAIThreatRating = 40;
-        }
-    } */
 
     return true;
 }
-
-/* function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
-{
-	if( PlayerController(Other)!=None )
-	{
-		PendingPlayers[PendingPlayers.Length] = PlayerController(Other);
-		SetTimer(0.1,false);
-	}
-	else if( Bot(Other)!=None && Bot(Other).PawnClass==Class'KFHumanPawn' )
-	{
-		Bot(Other).PawnClass = Class'MutSR_SRHumanPawn';
-		Bot(Other).PreviousPawnClass = Class'MutSR_SRHumanPawn';
-	}
-	else if( MutSR_ServerStStats(Other)!=None )
-		SetMutSR_ServerPerks(MutSR_ServerStStats(Other));
-	else if( MutSR_ClientPerkRepLink(Other)!=None )
-		SetupRepLink(MutSR_ClientPerkRepLink(Other));
-
-	return true;
-} */
-
 
 function bool ShouldReplacePickups()
 {
@@ -884,59 +837,13 @@ defaultproperties
 	Perks(2)="MutSR.MutSR_SRVetSharpshooter"
 	Perks(6)="MutSR.MutSR_SRVetDemolitions"
 
-	// pickupReplaceArray(0)=(oldClass=Class'KFMod.MP7MPickup',NewClass=class'ScrnMP7MPickup')
-    // pickupReplaceArray(1)=(oldClass=Class'KFMod.MP5MPickup',NewClass=class'ScrnMP5MPickup')
-    // pickupReplaceArray(2)=(oldClass=Class'KFMod.KrissMPickup',NewClass=class'ScrnKrissMPickup')
-    // pickupReplaceArray(3)=(oldClass=Class'KFMod.M7A3MPickup',NewClass=class'ScrnM7A3MPickup')
-    // pickupReplaceArray(4)=(oldClass=Class'KFMod.ShotgunPickup',NewClass=class'ScrnShotgunPickup')
-    // pickupReplaceArray(5)=(oldClass=Class'KFMod.BoomStickPickup',NewClass=class'ScrnBoomStickPickup')
-    // pickupReplaceArray(6)=(oldClass=Class'KFMod.NailGunPickup',NewClass=class'ScrnNailGunPickup')
-    // pickupReplaceArray(7)=(oldClass=Class'KFMod.KSGPickup',NewClass=class'ScrnKSGPickup')
 	
-    bReplacePickups=true
-    pickupReplaceArray(0)=(oldClass=Class'KFMod.BenelliPickup',NewClass=class'BenelliEPickup')
-    pickupReplaceArray(1)=(oldClass=Class'KFMod.GoldenBenelliPickup',NewClass=class'BenelliEPickup')
-    // pickupReplaceArray(9)=(oldClass=Class'KFMod.AA12Pickup',NewClass=class'ScrnAA12Pickup')
-    // pickupReplaceArray(10)=(oldClass=Class'KFMod.SinglePickup',NewClass=class'ScrnSinglePickup')
-    // pickupReplaceArray(11)=(oldClass=Class'KFMod.Magnum44Pickup',NewClass=class'ScrnMagnum44Pickup')
-    // pickupReplaceArray(12)=(oldClass=Class'KFMod.MK23Pickup',NewClass=class'ScrnMK23Pickup')
-    // pickupReplaceArray(13)=(oldClass=Class'KFMod.DeaglePickup',NewClass=class'ScrnDeaglePickup')
-    // pickupReplaceArray(14)=(oldClass=Class'KFMod.WinchesterPickup',NewClass=class'ScrnWinchesterPickup')
-    // pickupReplaceArray(15)=(oldClass=Class'KFMod.SPSniperPickup',NewClass=class'ScrnSPSniperPickup')
-    // pickupReplaceArray(16)=(oldClass=Class'KFMod.M14EBRPickup',NewClass=class'ScrnM14EBRPickup')
-    // pickupReplaceArray(17)=(oldClass=Class'KFMod.M99Pickup',NewClass=class'ScrnM99Pickup')
-    // pickupReplaceArray(18)=(oldClass=Class'KFMod.BullpupPickup',NewClass=class'ScrnBullpupPickup')
-    // pickupReplaceArray(19)=(oldClass=Class'KFMod.AK47Pickup',NewClass=class'ScrnAK47Pickup')
-    // pickupReplaceArray(20)=(oldClass=Class'KFMod.M4Pickup',NewClass=class'ScrnM4Pickup')
-    // pickupReplaceArray(21)=(oldClass=Class'KFMod.SPThompsonPickup',NewClass=class'ScrnSPThompsonPickup')
-    // pickupReplaceArray(22)=(oldClass=Class'KFMod.ThompsonDrumPickup',NewClass=class'ScrnThompsonDrumPickup')
-    // pickupReplaceArray(23)=(oldClass=Class'KFMod.SCARMK17Pickup',NewClass=class'ScrnSCARMK17Pickup')
-    // pickupReplaceArray(24)=(oldClass=Class'KFMod.FNFAL_ACOG_Pickup',NewClass=class'ScrnFNFAL_ACOG_Pickup')
-    // pickupReplaceArray(25)=(oldClass=Class'KFMod.MachetePickup',NewClass=class'ScrnMachetePickup')
-    // pickupReplaceArray(26)=(oldClass=Class'KFMod.AxePickup',NewClass=class'ScrnAxePickup')
-    // pickupReplaceArray(27)=(oldClass=Class'KFMod.ChainsawPickup',NewClass=class'ScrnChainsawPickup')
-    // pickupReplaceArray(28)=(oldClass=Class'KFMod.KatanaPickup',NewClass=class'ScrnKatanaPickup')
-    // pickupReplaceArray(29)=(oldClass=Class'KFMod.ScythePickup',NewClass=class'ScrnScythePickup')
-    // pickupReplaceArray(30)=(oldClass=Class'KFMod.ClaymoreSwordPickup',NewClass=class'ScrnClaymoreSwordPickup')
-    // pickupReplaceArray(31)=(oldClass=Class'KFMod.CrossbuzzsawPickup',NewClass=class'ScrnCrossbuzzsawPickup')
-    // pickupReplaceArray(32)=(oldClass=Class'KFMod.MAC10Pickup',NewClass=class'ScrnMAC10Pickup')
-    // pickupReplaceArray(33)=(oldClass=Class'KFMod.FlareRevolverPickup',NewClass=class'ScrnFlareRevolverPickup')
-    // pickupReplaceArray(34)=(oldClass=Class'KFMod.DualFlareRevolverPickup',NewClass=class'ScrnDualFlareRevolverPickup')
-    // pickupReplaceArray(35)=(oldClass=Class'KFMod.FlameThrowerPickup',NewClass=class'ScrnFlameThrowerPickup')
-    // pickupReplaceArray(36)=(oldClass=Class'KFMod.HuskGunPickup',NewClass=class'ScrnHuskGunPickup')
-    // pickupReplaceArray(37)=(oldClass=Class'KFMod.PipeBombPickup',NewClass=class'ScrnPipeBombPickup')
-    pickupReplaceArray(2)=(oldClass=Class'KFMod.M4203Pickup',NewClass=class'M4203CPickup')
-    // pickupReplaceArray(39)=(oldClass=Class'KFMod.M32Pickup',NewClass=class'ScrnM32Pickup')
-    pickupReplaceArray(3)=(oldClass=Class'KFMod.LAWPickup',NewClass=class'LAWDPickup')
-    pickupReplaceArray(4)=(oldClass=Class'KFMod.DwarfAxePickup',NewClass=class'DwarfAxeZPickup')
-    // pickupReplaceArray(41)=(oldClass=Class'KFMod.Dual44MagnumPickup',NewClass=class'ScrnDual44MagnumPickup')
-    // pickupReplaceArray(42)=(oldClass=Class'KFMod.DualMK23Pickup',NewClass=class'ScrnDualMK23Pickup')
-    // pickupReplaceArray(43)=(oldClass=Class'KFMod.DualDeaglePickup',NewClass=class'ScrnDualDeaglePickup')
-    // pickupReplaceArray(44)=(oldClass=Class'KFMod.SyringePickup',NewClass=class'ScrnSyringePickup')
-    // pickupReplaceArray(45)=(oldClass=Class'KFMod.FragPickup',NewClass=class'ScrnFragPickup')
-    // pickupReplaceArray(46)=(oldClass=Class'KFMod.M79Pickup',NewClass=class'ScrnM79Pickup')
-    // pickupReplaceArray(47)=(oldClass=Class'KFMod.CrossbowPickup',NewClass=class'ScrnCrossbowPickup')
-    // pickupReplaceArray(48)=(oldClass=Class'KFMod.KnifePickup',NewClass=class'ScrnKnifePickup')
+	    bReplacePickups=true
+	    pickupReplaceArray(0)=(oldClass=Class'KFMod.BenelliPickup',NewClass=class'BenelliEPickup')
+	    pickupReplaceArray(1)=(oldClass=Class'KFMod.GoldenBenelliPickup',NewClass=class'BenelliEPickup')
+	    pickupReplaceArray(2)=(oldClass=Class'KFMod.M4203Pickup',NewClass=class'M4203CPickup')
+	    pickupReplaceArray(3)=(oldClass=Class'KFMod.LAWPickup',NewClass=class'LAWDPickup')
+	    pickupReplaceArray(4)=(oldClass=Class'KFMod.DwarfAxePickup',NewClass=class'DwarfAxeZPickup')
 
 	MinPerksLevel=6
 	MaxPerksLevel=6
@@ -1043,76 +950,15 @@ defaultproperties
 	TraderInventory(71)="1:KFMod.NeonKSGPickup"
 	TraderInventory(72)="3:KFMod.NeonSCARMK17Pickup"
 
-    WeaponCategories(0)="0:[-PARAMEDIC|医疗-]"
-    WeaponCategories(1)="1:[-ENFORCER|支援-]"
-    WeaponCategories(2)="2:[-MARKSMAN|神射-]"
-    WeaponCategories(3)="3:[-CTROPPER|突击-]"
-    WeaponCategories(4)="4:[-BAZERKER|狂战-]"
-    WeaponCategories(5)="5:[-ARSONIST|纵火-]"
-    WeaponCategories(6)="6:[-BLASTER|爆破-]"
+    WeaponCategories(0)="0:[-PARAMEDIC-]"
+    WeaponCategories(1)="1:[-ENFORCER-]"
+    WeaponCategories(2)="2:[-MARKSMAN-]"
+    WeaponCategories(3)="3:[-CTROPPER-]"
+    WeaponCategories(4)="4:[-BAZERKER-]"
+    WeaponCategories(5)="5:[-ARSONIST-]"
+    WeaponCategories(6)="6:[-BLASTER-]"
     WeaponCategories(7)="7:[-OFFPERK-]"
 
 	Mutator(0) = ""
 	SmileyTags(0)=(IconTag="ah",IconTexture="MutSR.A")
-	//  SmileyTags(1)=(IconTag="unhappy",IconTexture="MutSR.BGX")
-	//  SmileyTags(2)=(IconTag="fuck",IconTexture="MutSR.BS")
-	//  SmileyTags(3)=(IconTag="guai",IconTexture="MutSR.G")
-	//  SmileyTags(4)=(IconTag="han",IconTexture="MutSR.H")
-	//  SmileyTags(5)=(IconTag="hehe",IconTexture="MutSR.HH")
-	//  SmileyTags(6)=(IconTag="heixian",IconTexture="MutSR.HX")
-	//  SmileyTags(7)=(IconTag="huaxin",IconTexture="MutSR.HX2")
-	//  SmileyTags(8)=(IconTag="jingku",IconTexture="MutSR.JK")
-	//  SmileyTags(9)=(IconTag="jingya",IconTexture="MutSR.JY")
-	//  SmileyTags(10)=(IconTag="cool",IconTexture="MutSR.K")
-	//  SmileyTags(11)=(IconTag="kuanghan",IconTexture="MutSR.KH")
-	//  SmileyTags(12)=(IconTag="happy",IconTexture="MutSR.KX")
-	//  SmileyTags(13)=(IconTag="tear",IconTexture="MutSR.L")
-	//  SmileyTags(14)=(IconTag="mianqiang",IconTexture="MutSR.MQ")
-	//  SmileyTags(15)=(IconTag="cold",IconTexture="MutSR.N")
-	//  SmileyTags(16)=(IconTag="angry",IconTexture="MutSR.NU")
-	//  SmileyTags(17)=(IconTag="pu",IconTexture="MutSR.P")
-	//  SmileyTags(18)=(IconTag="dosh",IconTexture="MutSR.Q")
-	//  SmileyTags(19)=(IconTag="mad",IconTexture="MutSR.SQ")
-	//  SmileyTags(20)=(IconTag="high",IconTexture="MutSR.TKX")
-	//  SmileyTags(21)=(IconTag="naive",IconTexture="MutSR.TS")
-	//  SmileyTags(22)=(IconTag="smile",IconTexture="MutSR.XY")
-	//  SmileyTags(23)=(IconTag="yi",IconTexture="MutSR.Y")
-	//  SmileyTags(24)=(IconTag="yiwen",IconTexture="MutSR.YW")
-	//  SmileyTags(25)=(IconTag="yinxian",IconTexture="MutSR.YX")
-	//  SmileyTags(26)=(IconTag="good",IconTexture="MutSR.ZB")
-	//  SmileyTags(27)=(IconTag="haha",IconTexture="MutSR.HH1")
-	//  SmileyTags(28)=(IconTag="sleep",IconTexture="MutSR.SJ")
-	//  SmileyTags(29)=(IconTag="yuan",IconTexture="MutSR.WQ")
-	//  SmileyTags(30)=(IconTag="huaji",IconTexture="MutSR.HJ")
-	//  SmileyTags(31)=(IconTag="wmm",IconTexture="MutSR.WMM")
-	//  SmileyTags(32)=(IconTag="llxg",IconTexture="MutSR.LLXG")
-	//  SmileyTags(33)=(IconTag="seeu",IconTexture="MutSR.KNZB")
-	//  SmileyTags(34)=(IconTag="doge",IconTexture="MutSR.DOGE")
-	//  SmileyTags(35)=(IconTag="doge1",IconTexture="MutSR.DOGE1")
-	//  SmileyTags(36)=(IconTag="nani",IconTexture="MutSR.NN")
-	//  SmileyTags(37)=(IconTag="cannian",IconTexture="MutSR.CN")
-	//  SmileyTags(38)=(IconTag="chijing",IconTexture="MutSR.CJ")
-	//  SmileyTags(39)=(IconTag="233",IconTexture="MutSR.233")
-	//  SmileyTags(40)=(IconTag="2333",IconTexture="MutSR.2333")
-	//  SmileyTags(41)=(IconTag="23333",IconTexture="MutSR.23333")
-	//  SmileyTags(42)=(IconTag="fuckit",IconTexture="MutSR.BYSJSG")
-	//  SmileyTags(43)=(IconTag="yeyeye",IconTexture="MutSR.HDZDL")
-	//  SmileyTags(44)=(IconTag="huang",IconTexture="MutSR.HHA")
-	//  SmileyTags(45)=(IconTag="heihh",IconTexture="MutSR.HHH")
-	//  SmileyTags(46)=(IconTag="high1",IconTexture="MutSR.HQL")
-	//  SmileyTags(47)=(IconTag="high2",IconTexture="MutSR.QLH")
-	//  SmileyTags(48)=(IconTag="note",IconTexture="MutSR.SHZYD")
-	//  SmileyTags(49)=(IconTag="gn",IconTexture="MutSR.WA")
-	//  SmileyTags(50)=(IconTag="wow",IconTexture="MutSR.WO")
-	//  SmileyTags(51)=(IconTag="ttpb",IconTexture="MutSR.ZBKSLM")
-	//  SmileyTags(52)=(IconTag="666",IconTexture="MutSR.666")
-	//  SmileyTags(53)=(IconTag="2...",IconTexture="MutSR.DDD")
-	//  SmileyTags(54)=(IconTag="???",IconTexture="MutSR.Wenhao")
-	//  SmileyTags(55)=(IconTag="fan",IconTexture="MutSR.Fan")
-	//  SmileyTags(56)=(IconTag="yes",IconTexture="MutSR.Haode")
-	//  SmileyTags(57)=(IconTag="trash",IconTexture="MutSR.Laji")
-	//  SmileyTags(58)=(IconTag="notfunny",IconTexture="MutSR.Buhaoxiao")
-	//  SmileyTags(59)=(IconTag="1...",IconTexture="MutSR.DD")
-	//  SmileyTags(60)=(IconTag="yep",IconTexture="MutSR.Keyi")
-	//  SmileyTags(61)=(IconTag="great",IconTexture="MutSR.Qiangshi")
 }

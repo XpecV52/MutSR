@@ -859,8 +859,8 @@ defaultproperties
 	bEnhancedShoulderView=False
 	bFixGrenadeExploit=True
 	bAdminEditStats=True
-	SRScoreboardType=class'MutSR_ScoreBoard'
-	SRHudType=class'MutSR_SRHUDA'
+	SRScoreboardType=class'MutSR_SRScoreBoard'
+	SRHudType=class'MutSR_SRHUDKillngFloor'
 	SRMenuType=class'MutSR_SRInvasionLoginMenu'
 	SRControllerType=class'MutSR_KFPCServ'
 	bEnableWebAdmin=True

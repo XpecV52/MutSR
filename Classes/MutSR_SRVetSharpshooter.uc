@@ -166,10 +166,6 @@ static function AddDefaultInventory(KFPlayerReplicationInfo KFPRI, Pawn P)
 		KFHumanPawn(P).CreateInventoryVeterancy(string(class'Crossbow'), default.StartingWeaponSellPriceLevel6);
 }
 
-static function class<Grenade> GetNadeType(KFPlayerReplicationInfo KFPRI)
-{
-	return class'MutCryoNade.CryoNade'; 
-}
 
 static function string GetCustomLevelInfo( byte Level )
 {

@@ -8,7 +8,7 @@ All credits to [Marco](https://steamcommunity.com/profiles/76561197975509070/).
 ## Installation
 
 ```cpp
-sss
+MutSR.MutSR_ServerPerksMut
 ```
 
 ## Building and Dependancies
